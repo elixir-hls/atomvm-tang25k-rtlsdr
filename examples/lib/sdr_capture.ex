@@ -1,32 +1,30 @@
 defmodule SdrCapture do
   @moduledoc """
-  P1: the RTL-SDR's IQ flowing into the FPGA pipeline. Elixir opens and tunes the RTL-SDR
-  through NIFs; the USB host's bulk IN feeds the pipeline; a slice of it is captured back to
-  check that it looks like IQ.
+  P1: the RTL-SDR's IQ flowing into the FPGA. Elixir opens and tunes the RTL-SDR
+  through NIFs; the USB host's bulk IN goes into the FPGA; a slice of it is read back to check
+  that it looks like IQ.
   """
   use EHLS, blocks: [EHLS.USBHost]
   import Bitwise
 
-  defpipeline iq do
-    usb_bulk_in() |> capture()
+  definstance iq, overflow: :drop do
+    usb_bulk_in()
   end
 
   def start(freq \\ 82_500_000) do
     IO.puts("rtlsdr: open at #{freq} Hz: #{inspect(RTLSDR.open(freq, 0))}")
-    iq(:start)
     :ok = RTLSDR.start()
     :timer.sleep(200)
     {p0, _, _} = RTLSDR.stats()
     :timer.sleep(1000)
     {p1, naks, errs} = RTLSDR.stats()
     IO.puts("rtlsdr: #{p1 - p0} packets in 1 s (#{(p1 - p0) * 512} bytes), naks #{naks}, errors #{errs}")
-    bin = :hwstream.capture(4096 * 4)
+    bin = iq(:out, 4096 * 4)
     bytes = for <<w::little-32 <- bin>>, do: w &&& 0xFF
     {is, qs} = split_iq(bytes, [], [])
     IO.puts("I: #{describe(is)}")
     IO.puts("Q: #{describe(qs)}")
     RTLSDR.stop()
-    iq(:stop)
     :ok
   end
 

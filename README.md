@@ -50,7 +50,7 @@ test/ref/transfers.sh        # gcc and Elixir on the host
 
 ## Example
 
-`examples/sdr_capture.ex`: `usb_bulk_in() |> capture()`, a slice of the IQ captured back to
+`examples/sdr_capture.ex`: `usb_bulk_in()` as an instance's result, a slice of the IQ read back to
 memory and summed up.
 
 ```sh
