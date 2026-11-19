@@ -6,9 +6,9 @@ host of [atomvm-tang25k-usb-host](https://github.com/elixir-hls/atomvm-tang25k-u
 opens and tunes the RTL-SDR, its IQ goes from the host's bulk IN engine into an FPGA pipeline
 (`usb_bulk_in()`) without passing through the CPU.
 
-```sh
-# the application's hls.env: this package and the USB host
-EHLS_BLOCKS=../atomvm-tang25k-usb-host:../atomvm-tang25k-rtlsdr
+```elixir
+# the application's mix.exs: this package (it brings the USB host, atomvm_tang25k_usb_host)
+{:atomvm_tang25k_rtlsdr, "~> 0.1"}
 ```
 
 ```elixir
@@ -33,7 +33,8 @@ fine tune and the lock bit back and retries, so the values written depend on the
 answers. The shadow and the device's address live in the process that called `open/2`: tune
 and set the gain from that process.
 
-It depends on atomvm-tang25k-usb-host, so the application's hls.env names both (above).
+It depends on atomvm-tang25k-usb-host, which comes with it as a dependency (above); an application run with
+the scripts by hand names both in its hls.env (`EHLS_BLOCKS=../atomvm-tang25k-usb-host:../atomvm-tang25k-rtlsdr`).
 
 ## Checks
 
