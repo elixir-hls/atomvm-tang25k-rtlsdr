@@ -1,3 +1,17 @@
+/* SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ * A port of librtlsdr (osmocom rtl-sdr / rtl-sdr-blog: librtlsdr.c, tuner_r82xx.c), and so under its
+ * license, the GNU General Public License version 2 or (at your option) any later version (LICENSE).
+ * The code it was ported from is
+ *   Copyright (C) 2012-2014 by Steve Markgraf <steve@steve-m.de>
+ *   Copyright (C) 2012 by Dimitri Stolnikov <horiz0n@gmx.net>              (librtlsdr.c)
+ *   Copyright (C) 2013 Mauro Carvalho Chehab <mchehab@redhat.com>
+ *   Copyright (C) 2013 Steve Markgraf <steve@steve-m.de>                   (tuner_r82xx.c)
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ */
 /* The reference for test/ref/transfers.sh: the C driver this package had before the Elixir
  * one (lib/rtlsdr.ex), unchanged but for this note and the build guard. */
 /* From usb-rtl-sdr-tv 42056a9 (apps/sdr/src). */
