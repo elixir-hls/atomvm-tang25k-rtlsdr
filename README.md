@@ -63,4 +63,10 @@ $H/build_ex.sh sdr_capture SdrCapture && $H/run.sh sdr_capture
 
 ## License
 
-Apache-2.0 (see [LICENSE](LICENSE)).
+GPL-2.0-or-later (see [LICENSE](LICENSE)): the driver (lib/rtlsdr.ex) is a port of librtlsdr
+(osmocom rtl-sdr / rtl-sdr-blog, `librtlsdr.c` and `tuner_r82xx.c`, GPL-2.0-or-later), whose
+copyrights are at the top of the file. Up to 0.1.0 the package was marked Apache-2.0 by mistake.
+
+An application built with this package (its AVM pack) goes out under the GPL as a whole; with
+Apache-2.0 packages (elixir_hls, atomvm_tang25k_hls, atomvm_tang25k_usb_host, ...) that is the
+GPL-3.0-or-later.
